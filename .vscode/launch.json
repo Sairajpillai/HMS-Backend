@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AppointmentApplication",
+            "request": "launch",
+            "mainClass": "com.hms.appointment.AppointmentApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-GatewayMsApplication<GatewayMS>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
@@ -27,6 +34,16 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.hms.profile.ProfileMsApplication",
             "projectName": "ProfileMS",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AppointmentApplication<Appointment>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.hms.appointment.AppointmentApplication",
+            "projectName": "Appointment",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

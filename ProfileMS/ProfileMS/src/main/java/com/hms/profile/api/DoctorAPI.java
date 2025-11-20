@@ -40,7 +40,10 @@ public class DoctorAPI {
     public ResponseEntity<DoctorDTO> updateDoctor(@RequestBody DoctorDTO dcotorDTO) throws HMSUserException{
         return new ResponseEntity<>(doctorService.updateDoctor(dcotorDTO),HttpStatus.OK);
     }
-    
-    
+
+    @GetMapping("/exists/{id}")
+    public ResponseEntity<Boolean> doctorExists(@PathVariable Long id) throws HMSUserException{
+        return new ResponseEntity<>(doctorService.doctorExists(id),HttpStatus.OK);
+    } 
     
 }

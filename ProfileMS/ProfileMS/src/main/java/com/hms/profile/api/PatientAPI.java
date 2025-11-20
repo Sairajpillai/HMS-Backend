@@ -19,6 +19,7 @@ import com.hms.profile.service.PatientService;
 
 
 
+
 @RestController
 @CrossOrigin
 @RequestMapping("/profile/patient")
@@ -42,7 +43,10 @@ public class PatientAPI {
     public ResponseEntity<PatientDTO> updatePatient(@RequestBody PatientDTO patientDTO) throws HMSUserException{
         return new ResponseEntity<>(patientService.updatePatient(patientDTO),HttpStatus.OK);
     }
-    
-    
+
+    @GetMapping("/exists/{id}")
+    public ResponseEntity<Boolean> patientExists(@PathVariable Long id){
+        return new ResponseEntity<>(patientService.patientExists(id),HttpStatus.OK);
+    }
     
 }
