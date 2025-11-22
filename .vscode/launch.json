@@ -46,6 +46,16 @@
             "projectName": "Appointment",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaServerApplication<EurekaServer>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.hms.eureka_server.EurekaServerApplication",
+            "projectName": "EurekaServer",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
