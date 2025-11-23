@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.hms.appointment.clients.ProfileClient;
 import com.hms.appointment.dto.DoctorDTO;
 import com.hms.appointment.dto.PatientDTO;
 
@@ -15,6 +16,7 @@ public class ApiService {
     @Autowired
     private WebClient.Builder webClient;
 
+    
     public Mono<Boolean> doctorExist(Long id){
             return webClient.build().get()
             .uri("http://localhost:9100/profile/doctor/exists/"+id)
