@@ -1,5 +1,7 @@
 package com.hms.appointment.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +29,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Long scheduleAppointment(AppointmentDTO appointmentDTO) throws HMSUserException {
-        // Boolean doctorExist = apiService.doctorExist(appointmentDTO.getDoctorId()).block();
-        Boolean doctorExist = profileClient.doctorExists(appointmentDTO.getId());
+        // Boolean doctorExist =
+        // apiService.doctorExist(appointmentDTO.getDoctorId()).block();
+        Boolean doctorExist = profileClient.doctorExists(appointmentDTO.getDoctorId());
         if (doctorExist == null || !doctorExist) {
             throw new HMSUserException("DOCTOR_NOT_FOUND");
         }
-        // Boolean patientExist = apiService.patientExist(appointmentDTO.getPatientId()).block();
+        // Boolean patientExist =
+        // apiService.patientExist(appointmentDTO.getPatientId()).block();
         Boolean patientExist = profileClient.patientExist(appointmentDTO.getPatientId());
         if (patientExist == null || !doctorExist) {
             throw new HMSUserException("PATIENT_NOT_FOUND");
@@ -75,15 +79,38 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDetails getAppointmentDetailsWithName(Long appointmentId) throws HMSUserException {
         AppointmentDTO appointmentDTO = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new HMSUserException("APPOINTMENT_NOT_FOUND")).toDTO();
-        // DoctorDTO doctorDTO = apiService.getDoctorByID(appointmentDTO.getDoctorId()).block();
+        // DoctorDTO doctorDTO =
+        // apiService.getDoctorByID(appointmentDTO.getDoctorId()).block();
         DoctorDTO doctorDTO = profileClient.getDoctorById(appointmentDTO.getDoctorId());
-        // PatientDTO patientDTO = apiService.getPatientByID(appointmentDTO.getPatientId()).block();
+        // PatientDTO patientDTO =
+        // apiService.getPatientByID(appointmentDTO.getPatientId()).block();
         PatientDTO patientDTO = profileClient.getPatientById(appointmentDTO.getPatientId());
-        return new AppointmentDetails(appointmentDTO.getId(), appointmentDTO.getPatientId(), patientDTO.getName(),patientDTO.getEmail(),patientDTO.getPhone(),
+        return new AppointmentDetails(appointmentDTO.getId(), appointmentDTO.getPatientId(), patientDTO.getName(),
+                patientDTO.getEmail(), patientDTO.getPhone(),
                 appointmentDTO.getDoctorId(), doctorDTO.getName(), appointmentDTO.getAppointmentTime(),
                 appointmentDTO.getStatus(), appointmentDTO.getReason(), appointmentDTO.getNotes());
     }
 
-   
+    // @Override traditional way
+    // public List<AppointmentDetails> getAllAppointmentsByPatientId(Long patientId) throws HMSUserException {
+
+    //     List<AppointmentDetails> appointments = appointmentRepository.findAllByPatientId(patientId);
+
+    //     for (AppointmentDetails appointment : appointments) {
+    //         DoctorDTO doctorDTO = profileClient.getDoctorById(appointment.getDoctorId());
+    //         appointment.setDoctorName(doctorDTO.getName());
+    //     }
+
+    //     return appointments;
+    // }
+    
+    @Override
+    public List<AppointmentDetails> getAllAppointmentsByPatientId(Long patientId) throws HMSUserException {
+        return appointmentRepository.findAllByPatientId(patientId).stream().map(appointment -> {
+            DoctorDTO doctorDTO = profileClient.getDoctorById(appointment.getDoctorId());
+            appointment.setDoctorName(doctorDTO.getName());
+            return appointment;
+        }).toList();
+    }
 
 }

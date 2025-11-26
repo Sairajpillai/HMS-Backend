@@ -1,5 +1,7 @@
 package com.hms.appointment.service;
 
+import java.util.List;
+
 import com.hms.appointment.dto.AppointmentDTO;
 import com.hms.appointment.dto.AppointmentDetails;
 import com.hms.appointment.exception.HMSUserException;
@@ -16,4 +18,6 @@ public interface AppointmentService {
     AppointmentDTO getappointmentDetails(Long appointmentId) throws HMSUserException;
 
     AppointmentDetails getAppointmentDetailsWithName(Long appointmentId) throws HMSUserException;
+
+    List<AppointmentDetails> getAllAppointmentsByPatientId(Long patientId) throws HMSUserException;
 }

@@ -13,7 +13,7 @@ public interface ProfileClient {
     @GetMapping("/profile/doctor/exists/{id}")
     Boolean doctorExists(@PathVariable("id") Long id);
 
-    @GetMapping("/profile/doctor/exists/{id}")
+    @GetMapping("/profile/patient/exists/{id}")
     Boolean patientExist(@PathVariable("id") Long id);
 
     @GetMapping("/profile/patient/get/{id}")

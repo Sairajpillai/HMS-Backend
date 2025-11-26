@@ -1,5 +1,7 @@
 package com.hms.appointment.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,5 +50,11 @@ public class AppointmentAPI {
     public ResponseEntity<AppointmentDetails> getAppointmentDEtailsWithName(@PathVariable Long appointmentId) throws HMSUserException{
         return new ResponseEntity<>(appointmentService.getAppointmentDetailsWithName(appointmentId),HttpStatus.OK);
     }
+
+    @GetMapping("/getAllByPatient/{patientId}")
+    public ResponseEntity<List<AppointmentDetails>> getAllappointmentsByPatientId(@PathVariable long patientId) throws HMSUserException{
+        return new ResponseEntity<>(appointmentService.getAllAppointmentsByPatientId(patientId),HttpStatus.OK);
+    }
+    
     
 }
