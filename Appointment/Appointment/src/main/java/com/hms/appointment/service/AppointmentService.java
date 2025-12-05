@@ -20,4 +20,6 @@ public interface AppointmentService {
     AppointmentDetails getAppointmentDetailsWithName(Long appointmentId) throws HMSUserException;
 
     List<AppointmentDetails> getAllAppointmentsByPatientId(Long patientId) throws HMSUserException;
+    
+    List<AppointmentDetails> getAllAppointmentsByDoctorId(Long doctorId) throws HMSUserException;
 }

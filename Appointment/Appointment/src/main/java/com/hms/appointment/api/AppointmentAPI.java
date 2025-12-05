@@ -55,6 +55,11 @@ public class AppointmentAPI {
     public ResponseEntity<List<AppointmentDetails>> getAllappointmentsByPatientId(@PathVariable long patientId) throws HMSUserException{
         return new ResponseEntity<>(appointmentService.getAllAppointmentsByPatientId(patientId),HttpStatus.OK);
     }
+
+    @GetMapping("/getAllByDoctor/{doctorId}")
+    public ResponseEntity<List<AppointmentDetails>> getAllappointmentsByDoctorId(@PathVariable long doctorId) throws HMSUserException{
+        return new ResponseEntity<>(appointmentService.getAllAppointmentsByDoctorId(doctorId),HttpStatus.OK);
+    }
     
     
 }
