@@ -1,8 +1,10 @@
 package com.hms.appointment.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.hms.appointment.dto.PrescriptionDTO;
+import com.hms.appointment.dto.PrescriptionDetails;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,5 +39,9 @@ public class Prescription {
 
     public PrescriptionDTO toDTO(){
         return new PrescriptionDTO(id, patientId, doctorId, doctorId, prescriptionDate, notes, null);
+    }
+
+    public PrescriptionDetails toDetails(){
+        return new PrescriptionDetails(id, patientId, doctorId, null, appointment.getId(), prescriptionDate, notes, null);
     }
 }

@@ -1,11 +1,16 @@
 package com.hms.appointment.clients;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hms.appointment.dto.DoctorDTO;
+import com.hms.appointment.dto.DoctorName;
 import com.hms.appointment.dto.PatientDTO;
+import com.hms.appointment.exception.HMSUserException;
 
 @FeignClient(name="ProfileMS")
 public interface ProfileClient {
@@ -21,5 +26,8 @@ public interface ProfileClient {
 
     @GetMapping("/profile/doctor/get/{id}")
     DoctorDTO getDoctorById(@PathVariable("id") Long id);
+
+    @GetMapping("/profile/doctor/getDoctorsById")
+    List<DoctorName> getDoctorById(@RequestParam List<Long> ids);
 
 }

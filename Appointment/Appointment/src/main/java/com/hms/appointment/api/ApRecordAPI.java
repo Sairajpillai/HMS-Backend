@@ -1,5 +1,7 @@
 package com.hms.appointment.api;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hms.appointment.dto.ApRecordDTO;
+import com.hms.appointment.dto.PrescriptionDetails;
+import com.hms.appointment.dto.RecordDetails;
 import com.hms.appointment.exception.HMSUserException;
 import com.hms.appointment.service.ApRecordService;
+import com.hms.appointment.service.PrescriptionService;
 
 import lombok.RequiredArgsConstructor;
+
 
 
 @RestController
@@ -27,6 +33,8 @@ import lombok.RequiredArgsConstructor;
 public class ApRecordAPI {
 
     private final ApRecordService apRecordService;
+
+    private final PrescriptionService prescriptionService;
 
     @PostMapping("/create")
     public ResponseEntity<Long> createAppointmentReport(@RequestBody ApRecordDTO request) throws HMSUserException {
@@ -53,6 +61,22 @@ public class ApRecordAPI {
     public ResponseEntity<ApRecordDTO> getAppointmentReportById(@PathVariable Long recordId) throws HMSUserException{
         return new ResponseEntity<>(apRecordService.getApRecordById(recordId),HttpStatus.OK);
     }
+
+    @GetMapping("/getRecordsByPatientId/{patientId}")
+    public ResponseEntity<List<RecordDetails>> getRecordsByPatientId(@PathVariable Long patientId) throws HMSUserException{
+        return new ResponseEntity<>(apRecordService.getApRecordsByPatientId(patientId),HttpStatus.OK);
+    }
+
+    @GetMapping("/isRecordExists/{appointmentId}")
+    public ResponseEntity<Boolean> isRecordExists(@PathVariable Long appointmentId) throws HMSUserException{
+        return new ResponseEntity<>(apRecordService.isRecordExists(appointmentId),HttpStatus.OK);
+    }
+
+    @GetMapping("/getPrescriptionsByPatientId/{patientId}")
+    public ResponseEntity<List<PrescriptionDetails>> getPrescriptionsByPatientId(@PathVariable Long patientId) throws HMSUserException{
+        return new ResponseEntity<>(prescriptionService.getPrescriptionDetailsByPatientId(patientId),HttpStatus.OK);
+    }
+    
     
     
 }
