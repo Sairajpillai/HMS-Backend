@@ -15,7 +15,8 @@
             "mainClass": "com.hms.gateway.GatewayMsApplication",
             "projectName": "GatewayMS",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=54473 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=GatewayMS"
         },
         {
             "type": "java",
@@ -25,7 +26,8 @@
             "mainClass": "com.hms.user.UserMsApplication",
             "projectName": "UserMS",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=49152 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=UserMS"
         },
         {
             "type": "java",
@@ -35,7 +37,8 @@
             "mainClass": "com.hms.profile.ProfileMsApplication",
             "projectName": "ProfileMS",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=49171 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=ProfileMS"
         },
         {
             "type": "java",
@@ -45,7 +48,8 @@
             "mainClass": "com.hms.appointment.AppointmentApplication",
             "projectName": "Appointment",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=54713 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=Appointment"
         },
         {
             "type": "java",
@@ -54,6 +58,17 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.hms.eureka_server.EurekaServerApplication",
             "projectName": "EurekaServer",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=60785 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=EurekaServer"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-PharmacyMsApplication<pharmacy>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.hms.pharmacy.PharmacyMsApplication",
+            "projectName": "pharmacy",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
