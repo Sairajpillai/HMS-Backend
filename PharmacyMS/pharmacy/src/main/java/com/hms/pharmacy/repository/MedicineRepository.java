@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface MedicineRepository extends CrudRepository<Medicine,Long>{
     Optional<Medicine>  findByNameIgnoreCaseAndDosageIgnoreCase(String name,String dosage);
+    Optional<Integer> findStockById(Long id);
 }

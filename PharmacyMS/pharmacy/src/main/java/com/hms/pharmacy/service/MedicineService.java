@@ -10,4 +10,7 @@ public interface MedicineService {
     public MedicineDTO getMedicineById(Long id) throws HMSUserException;
     public void updateMedicine(MedicineDTO medicineDTO) throws HMSUserException;
     public List<MedicineDTO> getAllMedicines() throws HMSUserException;
+    public Integer getStockById(Long id) throws HMSUserException;
+    public Integer addStock(Long id,Integer quantity) throws HMSUserException;
+    public Integer removeStock(Long id,Integer quantity) throws HMSUserException;
 }

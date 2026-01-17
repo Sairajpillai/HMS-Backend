@@ -26,6 +26,7 @@ public class MedicineServiceImpl implements MedicineService {
             throw new HMSUserException("MEDICINE_ALREADY_EXIST");
         }
         medicineDTO.setCreatedAt(LocalDateTime.now());
+        medicineDTO.setStock(0);
         return medicineRepository.save(medicineDTO.toEntity()).getId();
     }
 
@@ -59,5 +60,26 @@ public class MedicineServiceImpl implements MedicineService {
     @Override
     public List<MedicineDTO> getAllMedicines() throws HMSUserException {
         return ((List<Medicine>)medicineRepository.findAll()).stream().map(Medicine::toDTO).toList();
+    }
+
+    @Override
+    public Integer getStockById(Long id) throws HMSUserException {
+        return medicineRepository.findStockById(id).orElseThrow(()->new HMSUserException("MEDICINE_NOT_FOUND"));
+    }
+
+    @Override
+    public Integer addStock(Long id, Integer quantity) throws HMSUserException {
+        Medicine medicine = medicineRepository.findById(id).orElseThrow(()->new HMSUserException("MEDICINE_NOT_FOUND"));
+        medicine.setStock(medicine.getStock() != null ? medicine.getStock() + quantity : quantity);
+        medicineRepository.save(medicine);
+        return medicine.getStock();
+    }
+
+    @Override
+    public Integer removeStock(Long id, Integer quantity) throws HMSUserException {
+        Medicine medicine = medicineRepository.findById(id).orElseThrow(()->new HMSUserException("MEDICINE_NOT_FOUND"));
+        medicine.setStock(medicine.getStock() != null ? medicine.getStock() - quantity : 0);
+        medicineRepository.save(medicine);
+        return medicine.getStock();
     }   
 }
