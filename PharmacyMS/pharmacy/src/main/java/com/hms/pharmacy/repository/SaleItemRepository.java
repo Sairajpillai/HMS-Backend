@@ -10,5 +10,5 @@ import com.hms.pharmacy.entity.SaleItem;
 @Repository
 public interface SaleItemRepository extends CrudRepository<SaleItem,Long>{
     List<SaleItem> findBySaleId(Long saleId);
-    List<SaleItem> findByMeidicneId(Long medicineId);
+    List<SaleItem> findByMedicineId(Long medicineId);
 }
