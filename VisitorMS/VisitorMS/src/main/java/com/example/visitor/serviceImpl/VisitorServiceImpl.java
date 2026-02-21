@@ -12,6 +12,7 @@ import com.example.visitor.entity.Patient;
 import com.example.visitor.entity.Visitor;
 import com.example.visitor.entity.builder.VisitorBuilder;
 import com.example.visitor.exception.HMSUserException;
+import com.example.visitor.gateway.ProfileGateway;
 import com.example.visitor.repository.VisitorRepository;
 import com.example.visitor.service.VisitorService;
 import com.example.visitor.service.storage.PatientServiceAdapter;
@@ -28,23 +29,32 @@ public class VisitorServiceImpl implements VisitorService {
 
     private final PatientServiceAdapter patientAdapter;
 
+    private final ProfileGateway profileGateway;
+
     @Override
     public VisitorDTO saveVisitor(VisitorDTO visitorDTO) throws HMSUserException {
 
         Patient patient;
 
-        if (!profileClient.patientExist(visitorDTO.getPatientId())) {
-            throw new HMSUserException("PATIENT_NOT_FOUND");
-        } else {
-            PatientResponseDTO patientDTO = profileClient.getPatientById(visitorDTO.getPatientId());
-            patient = patientAdapter.adapt(patientDTO);
-        }
+        // direct calling ProfileMS through feing client
+        // if (!profileClient.patientExist(visitorDTO.getPatientId())) {
+        //     throw new HMSUserException("PATIENT_NOT_FOUND");
+        // } else {
+        //     PatientResponseDTO patientDTO = profileClient.getPatientById(visitorDTO.getPatientId());
+        //     patient = patientAdapter.adapt(patientDTO);
+        // }
+
+        PatientResponseDTO patientDTO = profileGateway.getPatient(visitorDTO.getPatientId());
+        patient = patientAdapter.adapt(patientDTO);
+
+        String verificationStatus ="UNVERIFIED".equals(patient.getName())? "PENDING_VERIFICATION": "VERIFIED";
 
         Visitor visitor = new VisitorBuilder()
                 .patient(patient.getId(), patient.getName())
                 .purpose(visitorDTO.getPurpose())
                 .visitTiming(LocalTime.now())
                 .visitorDetails(visitorDTO.getVisitorName(), visitorDTO.getRelation())
+                .verificationStatus(verificationStatus)
                 .build();
 
         Visitor savedVisitor = visitorRepo.save(visitor);

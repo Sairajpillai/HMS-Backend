@@ -32,4 +32,5 @@ public class Visitor {
     private LocalTime outTime;
 
     private String createdBy;
+    private String verificationStatus;
 }

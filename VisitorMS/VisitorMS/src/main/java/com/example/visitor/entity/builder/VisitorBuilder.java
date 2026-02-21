@@ -16,6 +16,7 @@ public class VisitorBuilder {
     private LocalTime inTime;
     private LocalTime outTime;
     private String createdBy;
+    private String verificationStatus;
 
     public VisitorBuilder patient(Long id, String name) {
         this.patientId = id;
@@ -44,6 +45,11 @@ public class VisitorBuilder {
         return this;
     }
 
+    public VisitorBuilder verificationStatus(String status) {
+        this.verificationStatus = status;
+        return this;
+    }
+
     public Visitor build() {
 
         if (patientId == null) {
@@ -63,6 +69,7 @@ public class VisitorBuilder {
                 LocalDate.now(),
                 inTime,
                 outTime,
-                createdBy);
+                createdBy,
+                verificationStatus);
     }
 }

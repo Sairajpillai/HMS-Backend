@@ -82,6 +82,16 @@
             "projectName": "media",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-VisitorMsApplication<VisitorMS>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.visitor.VisitorMsApplication",
+            "projectName": "VisitorMS",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
