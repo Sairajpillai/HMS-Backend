@@ -33,4 +33,12 @@ public class Visitor {
 
     private String createdBy;
     private String verificationStatus;
+
+    public void markVerified() {
+        this.verificationStatus = "VERIFIED";
+    }
+
+    public void markPending() {
+        this.verificationStatus = "PENDING_VERIFICATION";
+    }
 }

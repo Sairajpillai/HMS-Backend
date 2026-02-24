@@ -3,6 +3,7 @@ package com.example.visitor.serviceImpl;
 import java.time.LocalTime;
 import java.util.List;
 
+// import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.visitor.clients.ProfileClient;
@@ -11,6 +12,7 @@ import com.example.visitor.dto.VisitorDTO;
 import com.example.visitor.entity.Patient;
 import com.example.visitor.entity.Visitor;
 import com.example.visitor.entity.builder.VisitorBuilder;
+import com.example.visitor.event.VisitorVerificationEvent;
 import com.example.visitor.exception.HMSUserException;
 import com.example.visitor.gateway.ProfileGateway;
 import com.example.visitor.repository.VisitorRepository;
@@ -30,6 +32,8 @@ public class VisitorServiceImpl implements VisitorService {
     private final PatientServiceAdapter patientAdapter;
 
     private final ProfileGateway profileGateway;
+
+    // private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Override
     public VisitorDTO saveVisitor(VisitorDTO visitorDTO) throws HMSUserException {
@@ -58,6 +62,18 @@ public class VisitorServiceImpl implements VisitorService {
                 .build();
 
         Visitor savedVisitor = visitorRepo.save(visitor);
+
+        // Kafka
+        // if ("PENDING_VERIFICATION".equals(savedVisitor.getVerificationStatus())) {
+
+        //     VisitorVerificationEvent event =
+        //             new VisitorVerificationEvent(
+        //                     savedVisitor.getId(),
+        //                     savedVisitor.getPatientId()
+        //             );
+
+        //     kafkaTemplate.send("visitor-verification-topic", event);
+        // }
 
         return VisitorDTO.builder().id(savedVisitor.getId())
                 .patientId(savedVisitor.getPatientId())
